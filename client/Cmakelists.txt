@@ -1,0 +1,43 @@
+cmake_minimum_required(VERSION 3.1.0)
+
+project(client VERSION 1.0.0 LANGUAGES CXX)
+
+set(CMAKE_PREFIX_PATH "C:\\Qt\\Qt-5.15.2\\lib\\cmake\\")
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
+if(CMAKE_VERSION VERSION_LESS "3.7.0")
+    set(CMAKE_INCLUDE_CURRENT_DIR ON)
+endif()
+
+find_package(Qt5 COMPONENTS Widgets REQUIRED)
+
+add_executable(client
+    main.cpp
+    MainWindow.h
+    MainWindow.cpp
+    PlotWidget.h
+    PlotWidget.cpp
+    sinWidget.h
+    sinWidget.cpp
+    sliderWidget.h
+    sliderWidget.cpp
+    refByPhase.h
+    plotAgregate.h
+    plotAgregate.cpp
+    zoomViewer.h
+    zoomViewer.cpp
+    sinTable.h
+    sinTable.cpp
+    tcpClient.h
+    tcpClient.cpp
+    connectWidget.h
+    connectWidget.cpp
+)
+
+target_link_libraries(client Qt5::Widgets)
