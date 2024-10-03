@@ -25,11 +25,11 @@ public:
 connectionsTable(QWidget *parent = nullptr);
 ~connectionsTable();
 
+float getNextValue();
+
 signals:
 
 void newConnection(int sock,int port,QString ip);
-
-void newValue(float value);
 
 private:
 
@@ -38,8 +38,6 @@ void startListen();
 void stopListen();
 
 void connectionLoop();
-
-void UpdateLoop();
 
 void disconnectPressed();
 
@@ -58,7 +56,6 @@ QTableWidget *connectTable;
 bool breakFlag;
 std::mutex mtx;
 std::thread listenThread;
-std::thread updateThread;
 
 tcpServer server;
 

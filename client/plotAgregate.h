@@ -7,8 +7,7 @@
 #include "plotWidget.h"
 #include "zoomViewer.h"
 #include "sinTable.h"
-#include "connectWidget.h"
-
+#include "connectionAggregate.h"
 
 class plotAgregate : public QWidget{
 
@@ -24,8 +23,7 @@ private:
     QGridLayout *layout;
     zoomViewer *viewer;
     sinTable *sine;
-    connectWidget * connectW;
-
+    connectionAggregate *agregate;
 };
 
 

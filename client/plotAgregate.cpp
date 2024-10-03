@@ -17,14 +17,19 @@ plotAgregate::plotAgregate(QWidget *parent)
 
     viewer = new zoomViewer();
     viewer->setWidget(plot);
-   
-    connectW = new connectWidget();
-    connectW->setSource(sine);
+    
+    agregate = new connectionAggregate(sine);
+
+    //connectW = new connectWidget();
+    //connectW->setSource(sine);
+
+    //udpSender = new udpSenderWidget();
+    //udpSender->setSource(sine);
 
     layout->addWidget(viewer,0,0); 
     layout->addWidget(samplingRate,0,1);
     layout->addWidget(sine,0,2);
-    layout->addWidget(connectW,0,3);
+    layout->addWidget(agregate,0,3);
 
     connect(samplingRate,&sliderWidget::valueChanged,plot,&PlotWidget::setSamplingRate);
     connect(sine,&sinTable::valueChanged,plot,QOverload<>::of(&PlotWidget::update));

@@ -2,7 +2,7 @@
 
 tcpClient::tcpClient(){}
 
-tcpClient::~tcpClient(){}
+tcpClient::~tcpClient(){disconnect();}
 
 int tcpClient::Connect(const std::string &remoteIp,uint16_t remotePort)
 {

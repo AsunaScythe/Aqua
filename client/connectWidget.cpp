@@ -40,7 +40,6 @@ connectWidget::connectWidget(QWidget *parent)
 connectWidget::~connectWidget(){
     breakFlag = false;
     if(loopThread.joinable()) loopThread.join();
-    client.disconnect();
 }
 
 

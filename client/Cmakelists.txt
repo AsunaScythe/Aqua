@@ -38,6 +38,12 @@ add_executable(client
     tcpClient.cpp
     connectWidget.h
     connectWidget.cpp
+    udpClient.h
+    udpClient.cpp
+    udpSenderWidget.h
+    udpSenderWidget.cpp
+    connectionAggregate.h
+    connectionAggregate.cpp
 )
 
 target_link_libraries(client Qt5::Widgets)

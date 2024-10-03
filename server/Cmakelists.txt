@@ -33,6 +33,14 @@ add_executable(server
     tcpServerWidget.cpp
     connectionsTable.h
     connectionsTable.cpp
+    udpServer.h
+    udpServer.cpp
+    udpServerWidget.h
+    udpServerWidget.cpp
+    udpConnectionsTable.h
+    udpConnectionsTable.cpp
+    connectionAggregate.h
+    connectionAggregate.cpp
 )
 
 target_link_libraries(server Qt5::Widgets)

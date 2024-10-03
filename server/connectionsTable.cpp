@@ -20,7 +20,6 @@ connectionsTable::connectionsTable(QWidget * parent)
     connectTable->verticalHeader()->hide();
     connectTable->horizontalHeader()->hide();
 
-
     layout->addWidget(portLabel,0,0);
     layout->addWidget(portEdit,0,1);
     layout->addWidget(connectButton,1,0,1,2);
@@ -34,7 +33,6 @@ connectionsTable::connectionsTable(QWidget * parent)
 
 connectionsTable::~connectionsTable(){
     breakFlag = false;
-    if(updateThread.joinable()) updateThread.join();
     if(listenThread.joinable()) listenThread.join();
 }
 
@@ -50,7 +48,6 @@ void connectionsTable::startListen(){
         portEdit->setDisabled(true);
         breakFlag = true;
         listenThread = std::thread([&]{this->connectionLoop();});
-        updateThread = std::thread([&]{this->UpdateLoop();});
     }
 }
 
@@ -58,7 +55,6 @@ void connectionsTable::stopListen(){
 
     breakFlag = false;
     listenThread.join();
-    updateThread.join();
 
     server.disconnect();
 
@@ -109,20 +105,15 @@ void connectionsTable::connectionLoop(){
     } 
 }
 
-void connectionsTable::UpdateLoop(){
-    auto step = 1000000000ns/frequency;
-    auto time = std::chrono::steady_clock::now();
-    while(breakFlag){
-        float sum = 0;
-        float value;
-        std::this_thread::sleep_until(time += step);
-        std::lock_guard lock(mtx);
-        for(int i = 0;i < connectTable->rowCount();i++)
-            if(qobject_cast<tcpServerWidget*>(connectTable->cellWidget(i,0))->Recv(&value,sizeof(value)) != -1){
-                sum += value;
-        }
-        emit newValue(sum);
+float connectionsTable::getNextValue(){
+    float sum = 0;
+    float value;
+    std::lock_guard lock(mtx);
+    for(int i = 0;i < connectTable->rowCount();i++)
+        if(qobject_cast<tcpServerWidget*>(connectTable->cellWidget(i,0))->Recv(&value,sizeof(value)) != -1){
+            sum += value;
     }
+    return sum;
 }
 
 void connectionsTable::disconnected(){

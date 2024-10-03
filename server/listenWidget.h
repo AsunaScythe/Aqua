@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QGridLayout>
 #include "zoomViewer.h"
-#include "connectionsTable.h"
+#include "connectionAggregate.h"
 #include "PlotExternal.h"
 
 class listenWidget : public QWidget{
@@ -20,7 +20,7 @@ listenWidget(QWidget *parent = nullptr);
 private:
 
 QGridLayout *layout;
-connectionsTable *table;
+connectionAggregate *agregate;
 plotExternal *plot;
 zoomViewer *viewer;
 

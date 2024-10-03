@@ -11,11 +11,11 @@ listenWidget::listenWidget(QWidget *parent)
     viewer = new zoomViewer();
     viewer->setWidget(plot);
 
-    table = new connectionsTable(plot);
+    agregate = new connectionAggregate(plot);
 
-    connect(table,&connectionsTable::newValue,plot,&plotExternal::addValue);
+    connect(agregate,&connectionAggregate::newValue,plot,&plotExternal::addValue);
 
     layout->addWidget(viewer,0,0);
-    layout->addWidget(table,0,1);
+    layout->addWidget(agregate,0,1);
 
 }

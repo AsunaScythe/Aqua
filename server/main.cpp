@@ -6,7 +6,6 @@
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 #pragma comment (lib, "Ws2_32.lib")
 
-using namespace std::chrono_literals;
 
 int main(int argc,char *argv[]){
 
